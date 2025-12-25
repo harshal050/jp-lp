@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>共感・問題提起セクション（イラスト版）</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        /* 共感セクション全体 */
+        .empathy-section {
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* セクションタイトル */
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: #e74c3c;
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            font-size: 16px;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+
+        /* 悩みカード */
+        .worry-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .worry-card {
+            background: white;
+            border-radius: 16px;
+            padding: 35px 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .worry-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        /* カード番号バッジ */
+        .card-number {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 60px;
+            height: 60px;
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            opacity: 0.15;
+        }
+
+        /* イラストエリア */
+        .illustration-area {
+            text-align: center;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+            border-radius: 12px;
+        }
+
+        .illustration-area img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 悩みタイトル */
+        .worry-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #ecf0f1;
+        }
+
+        .worry-title span {
+            color: #e74c3c;
+            font-size: 22px;
+        }
+
+        /* 吹き出しエリア */
+        .voice-bubbles {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .voice-bubble {
+            background: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 18px 20px;
+            border-radius: 8px;
+            position: relative;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .voice-bubble::before {
+            content: '💭';
+            position: absolute;
+            left: -35px;
+            top: 15px;
+            font-size: 24px;
+        }
+
+        /* カラーバリエーション */
+        .worry-card:nth-child(1) .voice-bubble {
+            border-left-color: #e74c3c;
+        }
+
+        .worry-card:nth-child(2) .voice-bubble {
+            border-left-color: #f39c12;
+        }
+
+        .worry-card:nth-child(3) .voice-bubble {
+            border-left-color: #9b59b6;
+        }
+
+        /* 共感メッセージ */
+        .empathy-message {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px 30px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .empathy-message h3 {
+            font-size: 26px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .empathy-message p {
+            font-size: 17px;
+            color: #555;
+            line-height: 1.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .empathy-message .highlight {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 19px;
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .empathy-section {
+                padding: 40px 15px;
+            }
+
+            .section-title h2 {
+                font-size: 26px;
+            }
+
+            .worry-cards {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+
+            .worry-card {
+                padding: 30px 25px;
+            }
+
+            .illustration-area {
+                padding: 15px;
+            }
+
+            .worry-title {
+                font-size: 18px;
+            }
+
+            .voice-bubble {
+                font-size: 14px;
+                padding: 15px 18px;
+            }
+
+            .voice-bubble::before {
+                left: -30px;
+                font-size: 20px;
+            }
+
+            .empathy-message h3 {
+                font-size: 22px;
+            }
+
+            .empathy-message p {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="empathy-section">
+        <div class="container">
+            <!-- セクションタイトル -->
+            <div class="section-title">
+                <h2>こんなお悩み、ありませんか?</h2>
+                <p>不動産売却でよくあるお困りごとを集めました</p>
+            </div>
+
+            <!-- 悩みカード -->
+            <div class="worry-cards">
+                <!-- カード1: 売れない・値下げの悩み -->
+                <div class="worry-card">
+                    <div class="card-number">1</div>
+                    <div class="illustration-area">
+                        <img src="1.png" alt="売れない・値下げの悩み">
+                    </div>
+                    <h3 class="worry-title">
+                        <span>【売れない・値下げ】</span>の悩み
+                    </h3>
+                    <div class="voice-bubbles">
+                        <div class="voice-bubble">
+                            大手だから安心だと思ったのに、もう半年も売れていない...
+                        </div>
+                        <div class="voice-bubble">
+                            最初は「高く売れます」と言っていたのに、最近は「値下げしましょう」の電話ばかり
+                        </div>
+                    </div>
+                </div>
+
+                <!-- カード2: 遠方管理・草むしりの悩み -->
+                <div class="worry-card">
+                    <div class="card-number">2</div>
+                    <div class="illustration-area">
+                        <img src="2.png" alt="遠方管理・草むしりの悩み">
+                    </div>
+                    <h3 class="worry-title">
+                        <span>【遠方管理・草むしり】</span>の悩み
+                    </h3>
+                    <div class="voice-bubbles">
+                        <div class="voice-bubble">
+                            実家は新潟、私は県外。草むしりや空気の入れ替えだけに帰省するのはもう限界...
+                        </div>
+                        <div class="voice-bubble">
+                            鍵を預けたいけど、知らない業者に任せるのはなんだか怖い
+                        </div>
+                    </div>
+                </div>
+
+                <!-- カード3: 相続・片付けの悩み -->
+                <div class="worry-card">
+                    <div class="card-number">3</div>
+                    <div class="illustration-area">
+                        <img src="3.png" alt="相続・片付けの悩み">
+                    </div>
+                    <h3 class="worry-title">
+                        <span>【相続・片付け】</span>の悩み
+                    </h3>
+                    <div class="voice-bubbles">
+                        <div class="voice-bubble">
+                            親の荷物がそのままで、何から手をつけていいかわからない
+                        </div>
+                        <div class="voice-bubble">
+                            解体すべき？ そのまま売るべき？ 誰に聞けば正解なの？
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 共感メッセージ -->
+            <div class="empathy-message">
+                <h3>そのお悩み、私たちにお任せください。</h3>
+                <p>
+                    これまで数多くのお客様が同じような悩みを抱えて、<br class="pc-only">
+                    当社にご相談いただきました。<br><br>
+                    <span class="highlight">「もっと早く相談すればよかった」</span><br>
+                    これが、売却を成功されたお客様の共通の声です。
+                </p>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
